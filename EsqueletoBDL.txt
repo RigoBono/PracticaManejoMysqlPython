@@ -1,0 +1,44 @@
+
+CREATE DATABASE Libreria;
+
+CREATE TABLE Pais(
+IdPais INT PRIMARY KEY,
+Pais Varchar(30));
+
+CREATE TABLE Autor(
+IdAutor INT PRIMARY KEY,
+Autor VARCHAR(30));
+
+CREATE TABLE Genero(
+IdGenero INT PRIMARY KEY,
+Genero VARCHAR(30)
+);
+
+CREATE TABLE Editorial(
+IdEditorial INT PRIMARY KEY,
+IdPais INT,
+Editorial VARCHAR(30),
+FOREIGN KEY(IdPais) REFERENCES Pais(IdPais));
+
+CREATE TABLE Libro(
+IdLibro INT PRIMARY KEY,
+IdGenero INT,
+NombreLibro TEXT,
+ISBN VARCHAR(20),
+Cantidad INT,
+Precio DECIMAL,
+FOREIGN KEY(IdGenero) REFERENCES Genero(IdGenero));
+
+CREATE TABLE MaestraLibroAutor(
+IdAutor INT,
+IdLibro INT,
+FOREIGN KEY(IdLibro) REFERENCES Libro(IdLibro),
+FOREIGN KEY(IdAutor) REFERENCES Autor(IdAutor)
+);
+
+CREATE TABLE MaestraLibroEditorial(
+IdEditorial INT,
+IdLibro INT,
+FOREIGN KEY(IdLibro) REFERENCES Libro(IdLibro),
+FOREIGN KEY(IdEditorial) REFERENCES Editorial(IdEditorial)
+);
